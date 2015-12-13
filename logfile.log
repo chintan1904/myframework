@@ -481,3 +481,93 @@ Driver info: driver.version: RemoteWebDriver
 2015-12-13 17:00:27,202 INFO  [Log] ######################################################################## 
 2015-12-13 17:00:27,202 INFO  [Log] ###################       +E     N     D+        ####################### 
 2015-12-13 17:00:27,202 INFO  [Log] ######################################################################## 
+2015-12-13 20:12:43,985 INFO  [Log] ######################################################################## 
+2015-12-13 20:12:43,985 INFO  [Log] ###################       Login_001      ######################## 
+2015-12-13 20:12:43,985 INFO  [Log] ######################################################################## 
+2015-12-13 20:12:43,986 INFO  [Log] Open Firefox browser 
+2015-12-13 20:12:50,341 INFO  [Log] Set Implicite wait as 10 Seconds 
+2015-12-13 20:12:53,429 INFO  [Log] Maximize browser window 
+2015-12-13 20:12:53,962 INFO  [Log] Navigate to URL :  http://demo.silverstripe.org/Security/login 
+2015-12-13 20:12:57,842 INFO  [Log] Enter Text : german in field : txt_username 
+2015-12-13 20:12:57,993 INFO  [Log] Enter Text : password in field : txt_password 
+2015-12-13 20:12:58,083 INFO  [Log] Click button : btn_login 
+2015-12-13 20:13:00,952 INFO  [Log] Wait for 5 Seconds 
+2015-12-13 20:13:05,968 INFO  [Log] Quit driver session 
+2015-12-13 20:13:06,551 INFO  [Log] ######################################################################## 
+2015-12-13 20:13:06,551 INFO  [Log] ###################       +E     N     D+        ####################### 
+2015-12-13 20:13:06,551 INFO  [Log] ######################################################################## 
+2015-12-13 20:13:06,552 INFO  [Log] ######################################################################## 
+2015-12-13 20:13:06,552 INFO  [Log] ###################       Login_002      ######################## 
+2015-12-13 20:13:06,552 INFO  [Log] ######################################################################## 
+2015-12-13 20:13:06,552 INFO  [Log] Open Firefox browser 
+2015-12-13 20:13:11,515 INFO  [Log] Set Implicite wait as 10 Seconds 
+2015-12-13 20:13:14,257 INFO  [Log] Maximize browser window 
+2015-12-13 20:13:14,586 INFO  [Log] Navigate to URL :  http://demo.silverstripe.org/Security/login 
+2015-12-13 20:13:17,876 INFO  [Log] Enter Text : Arabic in field : txt_username 
+2015-12-13 20:13:18,077 INFO  [Log] Enter Text : password in field : txt_password 
+2015-12-13 20:13:18,771 INFO  [Log] Click button : btn_login 
+2015-12-13 20:13:20,726 INFO  [Log] Wait for 5 Seconds 
+2015-12-13 20:13:25,752 INFO  [Log] Quit driver session 
+2015-12-13 20:13:26,067 INFO  [Log] ######################################################################## 
+2015-12-13 20:13:26,067 INFO  [Log] ###################       +E     N     D+        ####################### 
+2015-12-13 20:13:26,067 INFO  [Log] ######################################################################## 
+2015-12-13 20:15:43,365 INFO  [Log] ######################################################################## 
+2015-12-13 20:15:43,365 INFO  [Log] ###################       Login_001      ######################## 
+2015-12-13 20:15:43,365 INFO  [Log] ######################################################################## 
+2015-12-13 20:15:43,366 INFO  [Log] Open Firefox browser 
+2015-12-13 20:15:48,977 INFO  [Log] Set Implicite wait as 10 Seconds 
+2015-12-13 20:15:51,675 INFO  [Log] Maximize browser window 
+2015-12-13 20:15:52,051 INFO  [Log] Navigate to URL :  http://demo.silverstripe.org/Security/login 
+2015-12-13 20:15:55,397 INFO  [Log] Enter Text : german in field : txt_username 
+2015-12-13 20:15:55,566 INFO  [Log] Enter Text : password in field : txt_password 
+2015-12-13 20:15:56,498 INFO  [Log] Click button : btn_login 
+2015-12-13 20:15:58,587 INFO  [Log] Wait for 5 Seconds 
+2015-12-13 20:16:03,597 INFO  [Log] Quit driver session 
+2015-12-13 20:16:04,098 INFO  [Log] ######################################################################## 
+2015-12-13 20:16:04,098 INFO  [Log] ###################       +E     N     D+        ####################### 
+2015-12-13 20:16:04,098 INFO  [Log] ######################################################################## 
+2015-12-13 20:16:04,098 INFO  [Log] ######################################################################## 
+2015-12-13 20:16:04,098 INFO  [Log] ###################       Login_002      ######################## 
+2015-12-13 20:16:04,098 INFO  [Log] ######################################################################## 
+2015-12-13 20:16:04,099 INFO  [Log] Open Firefox browser 
+2015-12-13 20:16:09,165 INFO  [Log] Set Implicite wait as 10 Seconds 
+2015-12-13 20:16:12,019 INFO  [Log] Maximize browser window 
+2015-12-13 20:16:12,318 INFO  [Log] Navigate to URL :  http://demo.silverstripe.org/Security/login 
+2015-12-13 20:16:15,432 INFO  [Log] Enter Text : Arabic in field : txt_username 
+2015-12-13 20:16:15,598 INFO  [Log] Enter Text : password in field : txt_password 
+2015-12-13 20:16:15,682 INFO  [Log] Click button : btn_login 
+2015-12-13 20:16:18,314 INFO  [Log] Wait for 5 Seconds 
+2015-12-13 20:16:23,327 INFO  [Log] Quit driver session 
+2015-12-13 20:16:23,645 INFO  [Log] ######################################################################## 
+2015-12-13 20:16:23,645 INFO  [Log] ###################       +E     N     D+        ####################### 
+2015-12-13 20:16:23,645 INFO  [Log] ######################################################################## 
+2015-12-13 20:23:34,924 INFO  [Log] ######################################################################## 
+2015-12-13 20:23:34,925 INFO  [Log] ###################       Login_001      ######################## 
+2015-12-13 20:23:34,925 INFO  [Log] ######################################################################## 
+2015-12-13 20:23:34,926 INFO  [Log] Open Firefox browser 
+2015-12-13 20:23:40,594 INFO  [Log] Set Implicite wait as 10 Seconds 
+2015-12-13 20:23:43,608 INFO  [Log] Maximize browser window 
+2015-12-13 20:23:43,973 INFO  [Log] Navigate to URL :  http://demo.silverstripe.org/Security/login 
+2015-12-13 20:23:47,539 INFO  [Log] Enter Text : german in field : txt_username 
+2015-12-13 20:23:47,711 INFO  [Log] Enter Text : password in field : txt_password 
+2015-12-13 20:23:48,354 INFO  [Log] Click button : btn_login 
+2015-12-13 20:23:50,373 INFO  [Log] Wait for 5 Seconds 
+2015-12-13 20:23:55,411 INFO  [Log] Quit driver session 
+2015-12-13 20:23:55,957 INFO  [Log] ######################################################################## 
+2015-12-13 20:23:55,957 INFO  [Log] ###################       +E     N     D+        ####################### 
+2015-12-13 20:23:55,957 INFO  [Log] ######################################################################## 
+2015-12-13 20:23:55,957 INFO  [Log] ######################################################################## 
+2015-12-13 20:23:55,957 INFO  [Log] ###################       Login_002      ######################## 
+2015-12-13 20:23:55,957 INFO  [Log] ######################################################################## 
+2015-12-13 20:23:55,957 INFO  [Log] Open Firefox browser 
+2015-12-13 20:24:01,081 INFO  [Log] Set Implicite wait as 10 Seconds 
+2015-12-13 20:24:03,841 INFO  [Log] Maximize browser window 
+2015-12-13 20:24:04,175 INFO  [Log] Navigate to URL :  http://demo.silverstripe.org/Security/login 
+2015-12-13 20:24:07,490 INFO  [Log] Enter Text : Arabic in field : txt_username 
+2015-12-13 20:24:07,664 INFO  [Log] Enter Text : password in field : txt_password 
+2015-12-13 20:24:07,739 INFO  [Log] Click button : btn_login 
+2015-12-13 20:24:10,306 INFO  [Log] Wait for 5 Seconds 
+2015-12-13 20:24:15,315 INFO  [Log] Quit driver session 
+2015-12-13 20:24:15,651 INFO  [Log] ######################################################################## 
+2015-12-13 20:24:15,651 INFO  [Log] ###################       +E     N     D+        ####################### 
+2015-12-13 20:24:15,651 INFO  [Log] ######################################################################## 

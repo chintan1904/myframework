@@ -94,6 +94,7 @@ public class DriverScript {
 			}
 			TestSuite.suite.add(test);
 		}
+		TestSuite.generateReport();
 	}
 
 	private static void executeActions() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
