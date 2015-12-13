@@ -13,7 +13,7 @@ public class Actions {
 	
 	public static WebDriver driver;
 	
-	public static void openBrowser(String object) {
+	public static void openBrowser(String object, String data) {
 		
 		try {
 			Log.info("Open Firefox browser");
@@ -47,47 +47,34 @@ public class Actions {
 		}
 	}
 	
-	public static void navigateTo(String object) {
+	public static void navigateTo(String object, String data) {
 		
 		try {
-			Log.info("Navigate to URL :  "+Constants.URL);
-			driver.navigate().to(Constants.URL);
+			Log.info("Navigate to URL :  "+data);
+			driver.navigate().to(data);
 		}
 		catch(Exception e) {
-			Log.error("Not able to navigate to URL :"+Constants.URL);
+			Log.error("Not able to navigate to URL :"+data);
 			Log.error(e.toString());
 			testResult = false;
 		}
 		
 	}
 	
-	public static void enterUserName(String object) {
+	public static void enterText(String object, String data) {
 		
 		try {
-			Log.info("Enter username : "+"german");
-			driver.findElement(By.xpath(OR.getProperty(object))).sendKeys("german");
+			Log.info("Enter Text : "+data+" in field : "+object);
+			driver.findElement(By.xpath(OR.getProperty(object))).sendKeys(data);
 		}
 		catch(Exception e) {
-			Log.error("Not able to enter username : ");
+			Log.error("Not able to enter text : "+data+" in field : "+object);
 			Log.error(e.toString());
 			testResult = false;
 		}
 	}
 	
-	public static void enterPassword(String object) {
-		
-		try {
-			Log.info("Enter username : "+"password");
-			driver.findElement(By.xpath(OR.getProperty(object))).sendKeys("password");
-		}
-		catch(Exception e) {
-			Log.error("Not able to enter password : ");
-			Log.error(e.toString());
-			testResult = false;
-		}
-	}
-	
-	public static void click(String object) {
+	public static void click(String object, String data) {
 		
 		try {
 			Log.info("Click button : "+object);
@@ -100,7 +87,7 @@ public class Actions {
 		}
 	}
 	
-	public static void waitFor(String object) throws InterruptedException {
+	public static void waitFor(String object, String data) throws InterruptedException {
 		
 		try { 
 			Log.info("Wait for 5 Seconds");
@@ -113,7 +100,7 @@ public class Actions {
 		}
 	}
 	
-	public static void close(String object) {
+	public static void close(String object, String data) {
 
 		try {
 			Log.info("Quit driver session");

@@ -19,6 +19,7 @@ public class DriverScript {
 	public static Properties OR;
 	public static String actionKeyword;
 	public static String pageElement;
+	public static String data;
 	public static boolean testResult = true;
 	
 	
@@ -56,6 +57,7 @@ public class DriverScript {
 				for(int i = 1; i < ExcelUtils.getLastRowNumber(testCase) ; i++) {
 					pageElement = ExcelUtils.getCellData(i, Constants.COL_PAGEELEMENT , testCase);
 					actionKeyword = ExcelUtils.getCellData(i, Constants.COL_ACTIONKEYWORD, testCase);
+					data = ExcelUtils.getCellData(i, Constants.COL_TESTSTEPDATA, testCase);
 					testResult = true;
 					executeActions();
 
@@ -83,14 +85,14 @@ public class DriverScript {
 		boolean methodExecuted = false;
 		for(int i = 0 ; i < method.length ; i++) {
 			if(method[i].getName().equals(actionKeyword)) {
-				method[i].invoke(actions,pageElement);
+				method[i].invoke(actions,pageElement,data);
 				methodExecuted = true;
 				break;
 			}
 		}
 		if(!methodExecuted) {
 			Log.error("Could not find required action :"+actionKeyword);
-			Actions.close("Called forcefully");
+			Actions.close("Called forcefully",data);
 			testResult = false;
 		}
 			

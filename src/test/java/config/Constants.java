@@ -14,9 +14,10 @@ public class Constants {
 	public static final int COL_TESTSTEPID = 1;
 	public static final int COL_PAGEELEMENT = 3;
 	public static final int COL_ACTIONKEYWORD = 4;
+	public static final int COL_TESTSTEPDATA = 5;
 	public static final int COL_RUNMODE = 2;
 	public static final int COL_TESTCASERESULT = 3;
-	public static final int COL_TESTSTEPRESULT = 5;
+	public static final int COL_TESTSTEPRESULT = 6;
 	
 	
 
