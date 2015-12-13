@@ -9,6 +9,8 @@ public class Constants {
 	public static final String ORFILEPATH = "src/test/java/config/OR.properties";
 	public static final String KEYWORD_PASS = "Pass";
 	public static final String KEYWORD_FAIL = "Fail";
+	public static final String KEYWORD_STARTED = "Started";
+	public static final String KEYWORD_SKIPPED = "Skipped";
 	
 	public static final int COL_TESTCASEID = 0;
 	public static final int COL_TESTSTEPID = 1;

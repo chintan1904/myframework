@@ -2,6 +2,8 @@ package utillity;
 
 import org.apache.log4j.Logger;
 
+import executionEngine.DriverScript;
+
 public class Log {
 	
 	public static Logger log = Logger.getLogger(Log.class.getName());
@@ -21,22 +23,28 @@ public class Log {
 	}
 	
 	public static void info(String message) { 
+		
+		DriverScript.test.append(message);
 		log.info(message);
 	}
 	
 	public static void error(String message) {
+		DriverScript.test.append(message);
 		log.error(message);
 	}
 	
 	public static void warn(String message) {
+		DriverScript.test.append(message);
 		log.warn(message);
 	}
 	
 	public static void debug(String message) {
+		DriverScript.test.append(message);
 		log.debug(message);
 	}
 	
 	public static void fatal(String message) {
+		DriverScript.test.append(message);
 		log.fatal(message);
 	}
 

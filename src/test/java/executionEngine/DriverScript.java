@@ -11,6 +11,8 @@ import config.Actions;
 import config.Constants;
 import utillity.ExcelUtils;
 import utillity.Log;
+import utillity.SingleTest;
+import utillity.TestSuite;
 
 public class DriverScript {
 	
@@ -21,6 +23,7 @@ public class DriverScript {
 	public static String pageElement;
 	public static String data;
 	public static boolean testResult = true;
+	public static SingleTest test;
 	
 	
 	public DriverScript() {
@@ -46,12 +49,20 @@ public class DriverScript {
 			testResult = false;
 		}
 		ExcelUtils.setExcelFile(excelFilePath);
-		 
+		
+		//Clear Test Suite :
+		TestSuite.suite.clear();
+		
 		for(int j = 1 ; j < ExcelUtils.getLastRowNumber(Constants.TESTSUITESHEETNAME); j++) {
 			
 			testResult = true;
 			String testCase = ExcelUtils.getCellData(j, Constants.COL_TESTCASEID, Constants.TESTSUITESHEETNAME);
 			String run = ExcelUtils.getCellData(j, Constants.COL_RUNMODE, Constants.TESTSUITESHEETNAME);
+			
+			//Create Object for Single Test
+			test = new SingleTest();
+			test.setTestName(testCase);
+			
 			if(run.equalsIgnoreCase("Yes")) {
 				Log.startTestCase(testCase);
 				for(int i = 1; i < ExcelUtils.getLastRowNumber(testCase) ; i++) {
@@ -68,16 +79,21 @@ public class DriverScript {
 						break;
 					}
 				}
-				if(testResult)
+				if(testResult) {
+					test.setTestStatus(Constants.KEYWORD_PASS);
 					ExcelUtils.setTestResultInExcel(Constants.TESTSUITESHEETNAME, j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_PASS);
-				else 
+				}
+				else {
+					test.setTestStatus(Constants.KEYWORD_FAIL);
 					ExcelUtils.setTestResultInExcel(Constants.TESTSUITESHEETNAME, j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_FAIL);
+				}
 				Log.endTestCase(testCase);
 			}
-
-			
+			else {
+				test.setTestStatus(Constants.KEYWORD_SKIPPED);
+			}
+			TestSuite.suite.add(test);
 		}
-		
 	}
 
 	private static void executeActions() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
