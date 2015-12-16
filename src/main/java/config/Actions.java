@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import static executionEngine.DriverScript.testResult;
 
+import utillity.Helper;
 import utillity.Log;
 
 public class Actions {
@@ -65,7 +66,8 @@ public class Actions {
 		
 		try {
 			Log.info("Enter Text : "+data+" in field : "+object);
-			driver.findElement(By.xpath(OR.getProperty(object))).sendKeys(data);
+			Helper.locateElement(OR.getProperty(object)).sendKeys(data);
+			//driver.findElement(By.xpath(OR.getProperty(object))).sendKeys(data);
 		}
 		catch(Exception e) {
 			Log.error("Not able to enter text : "+data+" in field : "+object);
@@ -78,7 +80,8 @@ public class Actions {
 		
 		try {
 			Log.info("Click button : "+object);
-			driver.findElement(By.xpath(OR.getProperty(object))).click();
+			Helper.locateElement(OR.getProperty(object)).click();
+			//driver.findElement(By.xpath(OR.getProperty(object))).click();
 		}
 		catch(Exception e) {
 			Log.error("Not able to click the button :"+object);
