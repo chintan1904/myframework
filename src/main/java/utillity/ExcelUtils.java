@@ -11,8 +11,6 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import config.Constants;
-
 public class ExcelUtils {
 	
 	private static XSSFWorkbook workbook;
@@ -70,7 +68,7 @@ public class ExcelUtils {
 		return rowNum;
 	}
 	
-	public static void setTestResultInExcel(String sheetName, int rowNum, int colNum, String result) {
+	public static void setTestResultInExcel(String excelFilePath, String sheetName, int rowNum, int colNum, String result) {
 		
 		try {
 			sheet = workbook.getSheet(sheetName);
@@ -85,7 +83,7 @@ public class ExcelUtils {
 				cell.setCellValue(result);
 			}
 			
-			FileOutputStream fout = new FileOutputStream(Constants.TESTSUITEFILEPATH);
+			FileOutputStream fout = new FileOutputStream(excelFilePath);
 			workbook.write(fout);
 			fout.close();
 		}

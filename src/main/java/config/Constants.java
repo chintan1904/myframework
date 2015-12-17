@@ -2,10 +2,11 @@ package config;
 
 public class Constants {
 	
-	public static final String URL = "http://demo.silverstripe.org/Security/login";
-	public static final String TESTSUITEFILEPATH = "src/main/resources/dataSources/LoginTest.xlsx";
-	public static final String TESTSUITEFILENAME = "LoginTest.xlsx";
-	public static final String TESTSUITESHEETNAME = "Test Cases";
+//	public static final String URL = "http://demo.silverstripe.org/Security/login";
+//	public static final String TESTSUITEFILEPATH = "src/main/resources/dataSources/LoginTest.xlsx";
+//	public static final String TESTSUITEFILENAME = "LoginTest.xlsx";
+//	public static final String TESTSUITESHEETNAME = "Test Cases";
+	
 	public static final String ORFILEPATH = "src/main/java/config/OR.properties";
 	public static final String KEYWORD_PASS = "Pass";
 	public static final String KEYWORD_FAIL = "Fail";

@@ -29,22 +29,26 @@ public class Log {
 	}
 	
 	public static void error(String message) {
-		DriverScript.test.append(message);
+		if(DriverScript.test != null )
+			DriverScript.test.append(message);
 		log.error(message);
 	}
 	
 	public static void warn(String message) {
-		DriverScript.test.append(message);
+		if(DriverScript.test != null )
+			DriverScript.test.append(message);
 		log.warn(message);
 	}
 	
 	public static void debug(String message) {
-		DriverScript.test.append(message);
+		if(DriverScript.test != null )
+			DriverScript.test.append(message);
 		log.debug(message);
 	}
 	
 	public static void fatal(String message) {
-		DriverScript.test.append(message);
+		if(DriverScript.test != null )
+			DriverScript.test.append(message);
 		log.fatal(message);
 	}
 
