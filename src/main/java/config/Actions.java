@@ -106,10 +106,11 @@ public class Actions {
 
 		try {
 			Log.info("Quit driver session");
+			driver.manage().deleteAllCookies();
 			driver.quit();
 		}
 		catch(Exception e) {
-			Log.error("Could quit webdriver session");
+			Log.error("Could not quit webdriver session");
 			Log.error(e.toString());
 			testResult = false;
 		}

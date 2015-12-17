@@ -1,10 +1,8 @@
 package utillity;
 
 import static executionEngine.DriverScript.testResult;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -91,9 +89,5 @@ public class ExcelUtils {
 			Log.error("Could not write result to a file, Sheet name: "+sheetName+" Row Num :"+rowNum+" Col Num :"+colNum+" Result :"+result);
 			testResult = false;
 		}
-		
-		
 	}
-	
-
 }

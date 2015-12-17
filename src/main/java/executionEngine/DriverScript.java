@@ -59,7 +59,7 @@ public class DriverScript {
 				break;
 			}
 		}
-		if(!methodExecuted) {
+		if(!methodExecuted || testResult == false) {
 			Log.error("Could not find required action :"+actionKeyword);
 			Actions.close("Called forcefully",data);
 			testResult = false;
@@ -81,6 +81,7 @@ public class DriverScript {
 			if(run.equalsIgnoreCase("Yes")) {
 				Log.startTestCase(testCase);
 				for(int i = 1; i < ExcelUtils.getLastRowNumber(testCase) ; i++) {
+					
 					pageElement = ExcelUtils.getCellData(i, Constants.COL_PAGEELEMENT , testCase);
 					actionKeyword = ExcelUtils.getCellData(i, Constants.COL_ACTIONKEYWORD, testCase);
 					data = ExcelUtils.getCellData(i, Constants.COL_TESTSTEPDATA, testCase);
@@ -93,6 +94,7 @@ public class DriverScript {
 						ExcelUtils.setTestResultInExcel(excelFilePath, testCase, i, Constants.COL_TESTSTEPRESULT, Constants.KEYWORD_FAIL);
 						break;
 					}
+					
 				}
 				if(testResult) {
 					test.setTestStatus(Constants.KEYWORD_PASS);
@@ -108,6 +110,7 @@ public class DriverScript {
 				test.setTestStatus(Constants.KEYWORD_SKIPPED);
 			}
 			TestSuite.suite.add(test);
+			test = null;
 		}
 	}
 
