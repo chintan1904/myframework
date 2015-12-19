@@ -22,33 +22,62 @@ public class Log {
 		log.info("########################################################################");
 	}
 	
+	public static void beforeTestStart(String sheetName) {
+		Log.info("----------- Before Test execution start : Sheet Name = "+sheetName);
+	}
+	
+	public static void  beforeTestend() {
+		Log.info("------------------- Before Test execution End ----------------------");
+	}
+	
+	public static void afterTestStart(String sheetName) {
+		Log.info("----------- After Test execution start : Sheet Name = "+sheetName);
+	}
+	
+	public static void  afterTestend() {
+		Log.info("------------------- After Test execution End ----------------------");
+	}
+
+	
+	
 	public static void info(String message) { 
-		
-		DriverScript.test.append(message);
+
+		if(DriverScript.test != null ) {
+			DriverScript.test.append(message);
+			DriverScript.test.append("<br>");
+		}
 		log.info(message);
 	}
 	
 	public static void error(String message) {
-		if(DriverScript.test != null )
+		if(DriverScript.test != null ) {
 			DriverScript.test.append(message);
+			DriverScript.test.append("<br>");
+		}
 		log.error(message);
 	}
 	
 	public static void warn(String message) {
-		if(DriverScript.test != null )
+		if(DriverScript.test != null ) {
 			DriverScript.test.append(message);
+			DriverScript.test.append("<br>");
+		}
 		log.warn(message);
 	}
 	
 	public static void debug(String message) {
-		if(DriverScript.test != null )
+		if(DriverScript.test != null ) {
 			DriverScript.test.append(message);
+			DriverScript.test.append("<br>");
+		}
 		log.debug(message);
 	}
 	
 	public static void fatal(String message) {
-		if(DriverScript.test != null )
+		if(DriverScript.test != null ) {
 			DriverScript.test.append(message);
+			DriverScript.test.append("<br>");
+		}
 		log.fatal(message);
 	}
 

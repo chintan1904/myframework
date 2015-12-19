@@ -25,16 +25,23 @@ public class Actions {
 			testResult = false;
 			
 		}
-		
+	}
+	
+	public static void setImpliciteWait(String object, String data) {
+
 		try {
-			Log.info("Set Implicite wait as 10 Seconds");
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+			Log.info("Set Implicite wait as "+data+" Seconds");
+			int time = Integer.parseInt(data);
+			driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
 		}
 		catch(Exception e) {
 			Log.error("Not able to Implicite timeout for webdriver");
 			Log.error(e.toString());
 			testResult = false;
 		}
+	}
+	
+	public static void maximizeWindow(String object, String data) {
 		
 		try {
 			Log.info("Maximize browser window");

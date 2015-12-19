@@ -24,6 +24,8 @@ public class DriverScript {
 	public static boolean testResult = true;
 	public static boolean configFileLoad = true;
 	public static SingleTest test;
+	private static String beforeTestSheetName;
+	private static String afterTestSheetName;
 	
 	public static void main(String[] args) throws Exception {
 		
@@ -48,26 +50,128 @@ public class DriverScript {
 		TestSuite.generateReport();
 	}
 
-	
-	private static void executeActions() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	/**
+	 * Matches the action name retrieved from excel with each methods available in Actions.class
+	 * If match is found then method is executed.
+	 * If match is not found, or any exception occurs while executing the action then step is marked as failed.
+	 * 
+	 * @author Chintan Shah
+	 */
+	private static void executeActions() {
 		
 		boolean methodExecuted = false;
-		for(int i = 0 ; i < method.length ; i++) {
-			if(method[i].getName().equals(actionKeyword)) {
-				method[i].invoke(actions,pageElement,data);
-				methodExecuted = true;
+		try { 
+			for(int i = 0 ; i < method.length ; i++) {
+				if(method[i].getName().equals(actionKeyword)) {
+					method[i].invoke(actions,pageElement,data);
+					methodExecuted = true;
+					break;
+				}
+			}
+		}
+		catch(Exception e) {
+
+			Log.error("Exception occured while executing the method : " +actionKeyword);
+			Log.error(e.toString());
+		}
+
+		if(!methodExecuted) { // || testResult == false
+			Log.error("Could not find required action :"+actionKeyword);
+			testResult = false;
+		}
+	}
+	
+	
+	
+	/**
+	 * Method executes all steps given in a test sheet.
+	 * 
+	 * @author Chintan Shah
+	 * @param excelFilePath 
+	 * @param testCase = Sheet name
+	 */
+	private static void executeTestCase(String excelFilePath, String testCase) { 
+		
+		for(int i = 1; i < ExcelUtils.getLastRowNumber(testCase) ; i++) {
+			
+			pageElement = ExcelUtils.getCellData(i, Constants.COL_PAGEELEMENT , testCase);
+			actionKeyword = ExcelUtils.getCellData(i, Constants.COL_ACTIONKEYWORD, testCase);
+			data = ExcelUtils.getCellData(i, Constants.COL_TESTSTEPDATA, testCase);
+			testResult = true;
+			executeActions();
+
+			if(testResult) {
+				if(!(testCase.equalsIgnoreCase(beforeTestSheetName) || testCase.equalsIgnoreCase(afterTestSheetName)))
+					ExcelUtils.setTestResultInExcel(excelFilePath, testCase, i, Constants.COL_TESTSTEPRESULT, Constants.KEYWORD_PASS);
+			}
+			else {
+				if(!(testCase.equalsIgnoreCase(beforeTestSheetName) || testCase.equalsIgnoreCase(afterTestSheetName)))
+					ExcelUtils.setTestResultInExcel(excelFilePath, testCase, i, Constants.COL_TESTSTEPRESULT, Constants.KEYWORD_FAIL);
 				break;
 			}
 		}
-		if(!methodExecuted || testResult == false) {
-			Log.error("Could not find required action :"+actionKeyword);
-			Actions.close("Called forcefully",data);
-			testResult = false;
+	}
+	
+	/**
+	 * Method to execute Before Test sheet.
+	 * System will check if sheet name is provided in config.properties file and execute the same.
+	 * If sheet name is not provided then this step will be skipped.
+	 * 
+	 * @author Chintan Shah
+	 * @param excelFilePath
+	 */
+	private static void executeBeforeTest(String excelFilePath) {
+
+		beforeTestSheetName = CONFIG.getProperty("BEFORE_TEST_SHEET_NAME");
+		if(beforeTestSheetName != null) {
+			if(ExcelUtils.isSheetPresent(beforeTestSheetName)) {
+				Log.beforeTestStart(beforeTestSheetName);
+				executeTestCase(excelFilePath, beforeTestSheetName);
+				Log.beforeTestend();
+			}
+			else {
+				Log.error("Could not find sheet : "+beforeTestSheetName);
+				testResult = false;
+			}
 		}
 			
 	}
 	
-	private static void runTestSuite(String excelFilePath, String excelSheetName) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	
+	/**
+	 * Method to execute After Test sheet.
+	 * System will check if sheet name is provided in config.properties file and execute the same.
+	 * If sheet name is not provided then this step will be skipped.
+	 * 
+	 * @author Chintan Shah
+	 * @param excelFilePath
+	 */
+	private static void executeAfterTest(String excelFilePath) {
+		
+		afterTestSheetName = CONFIG.getProperty("AFTER_TEST_SHEET_NAME");
+		if(afterTestSheetName != null) {
+			if(ExcelUtils.isSheetPresent(afterTestSheetName)) {
+				Log.afterTestStart(afterTestSheetName);
+				executeTestCase(excelFilePath, afterTestSheetName);
+				Log.afterTestend();
+			}
+			else {
+				Log.error("Could not find sheet : "+afterTestSheetName);
+				testResult = false;
+			}
+		}
+			
+	}
+	
+	/**
+	 * Method to execute complete test suite
+	 * 
+	 * @author Chintan Shah
+	 * @param excelFilePath
+	 * @param excelSheetName
+	 */
+	private static void runTestSuite(String excelFilePath, String excelSheetName) {
+		
 		for(int j = 1 ; j < ExcelUtils.getLastRowNumber(excelSheetName); j++) {
 			
 			testResult = true;
@@ -79,35 +183,37 @@ public class DriverScript {
 			test.setTestName(testCase);
 			
 			if(run.equalsIgnoreCase("Yes")) {
+				
 				Log.startTestCase(testCase);
-				for(int i = 1; i < ExcelUtils.getLastRowNumber(testCase) ; i++) {
-					
-					pageElement = ExcelUtils.getCellData(i, Constants.COL_PAGEELEMENT , testCase);
-					actionKeyword = ExcelUtils.getCellData(i, Constants.COL_ACTIONKEYWORD, testCase);
-					data = ExcelUtils.getCellData(i, Constants.COL_TESTSTEPDATA, testCase);
-					testResult = true;
-					executeActions();
-
-					if(testResult)
-						ExcelUtils.setTestResultInExcel(excelFilePath, testCase, i, Constants.COL_TESTSTEPRESULT, Constants.KEYWORD_PASS);
-					else {
-						ExcelUtils.setTestResultInExcel(excelFilePath, testCase, i, Constants.COL_TESTSTEPRESULT, Constants.KEYWORD_FAIL);
-						break;
-					}
-					
-				}
-				if(testResult) {
-					test.setTestStatus(Constants.KEYWORD_PASS);
-					ExcelUtils.setTestResultInExcel(excelFilePath, excelSheetName, j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_PASS);
+				executeBeforeTest(excelFilePath);
+				if(testResult == false) {
+					test.setTestStatus(Constants.KEYWORD_SKIPPED);
+					ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
 				}
 				else {
-					test.setTestStatus(Constants.KEYWORD_FAIL);
-					ExcelUtils.setTestResultInExcel(excelFilePath, excelSheetName, j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_FAIL);
+					if(ExcelUtils.isSheetPresent(testCase)) {
+						executeTestCase(excelFilePath, testCase);
+						if(testResult) {
+							test.setTestStatus(Constants.KEYWORD_PASS);
+							ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_PASS);
+						}
+						else {
+							test.setTestStatus(Constants.KEYWORD_FAIL);
+							ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_FAIL);
+						}
+					}
+					else {
+						Log.error("Could not find sheet : "+testCase);
+						test.setTestStatus(Constants.KEYWORD_SKIPPED);
+						ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
+					}
 				}
+				executeAfterTest(excelFilePath);
 				Log.endTestCase(testCase);
 			}
 			else {
 				test.setTestStatus(Constants.KEYWORD_SKIPPED);
+				ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
 			}
 			TestSuite.suite.add(test);
 			test = null;

@@ -4,6 +4,7 @@ import static executionEngine.DriverScript.testResult;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -31,10 +32,12 @@ public class ExcelUtils {
 	public static String getCellData(int rowNum, int colNum, String sheetName) {
 
 		String value;
+		DataFormatter formatter = new DataFormatter();
+		
 		try {
 			setWorkSheet(sheetName);
 			cell = sheet.getRow(rowNum).getCell(colNum);
-			value = cell.getStringCellValue();
+			value = formatter.formatCellValue(cell);
 		}
 		catch(Exception e) {
 			Log.error("Could not get cell value, Sheet Name : "+sheetName+" Row No : "+rowNum+"Column No : "+colNum);
@@ -89,5 +92,14 @@ public class ExcelUtils {
 			Log.error("Could not write result to a file, Sheet name: "+sheetName+" Row Num :"+rowNum+" Col Num :"+colNum+" Result :"+result);
 			testResult = false;
 		}
+	}
+	
+	public static boolean isSheetPresent(String sheetName) {
+		
+		XSSFSheet sheet = workbook.getSheet(sheetName);
+		if(sheet != null) 
+			return true;
+		else 
+			return false;
 	}
 }
