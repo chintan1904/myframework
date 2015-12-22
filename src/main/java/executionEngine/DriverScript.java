@@ -246,38 +246,44 @@ public class DriverScript {
 			test = new SingleTest();
 			test.setTestName(testCase);
 			
-			if(run.equalsIgnoreCase("Yes")) {
-				
-				Log.startTestCase(testCase);
-				executeBeforeTest(excelFilePath);
-				if(testResult == false) {
-					test.setTestStatus(Constants.KEYWORD_SKIPPED);
-					ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
-				}
-				else {
-					if(ExcelUtils.isSheetPresent(testCase)) {
-						executeTestCase(excelFilePath, testCase);
-						if(testResult) {
-							test.setTestStatus(Constants.KEYWORD_PASS);
-							ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_PASS);
-						}
-						else {
-							test.setTestStatus(Constants.KEYWORD_FAIL);
-							ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_FAIL);
-						}
-					}
-					else {
-						Log.error("Could not find sheet : "+testCase);
+			//Mark all tests as skipped if before suite method fails
+			if(beforeSuiteResult == false) { 
+				test.setTestStatus(Constants.KEYWORD_SKIPPED);
+				ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
+			}
+			else {
+				if(run.equalsIgnoreCase("Yes")) {
+					Log.startTestCase(testCase);
+					executeBeforeTest(excelFilePath);
+					if(testResult == false) {
 						test.setTestStatus(Constants.KEYWORD_SKIPPED);
 						ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
 					}
+					else {
+						if(ExcelUtils.isSheetPresent(testCase)) {
+							executeTestCase(excelFilePath, testCase);
+							if(testResult) {
+								test.setTestStatus(Constants.KEYWORD_PASS);
+								ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_PASS);
+							}
+							else {
+								test.setTestStatus(Constants.KEYWORD_FAIL);
+								ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_FAIL);
+							}
+						}
+						else {
+							Log.error("Could not find sheet : "+testCase);
+							test.setTestStatus(Constants.KEYWORD_SKIPPED);
+							ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
+						}
+					}
+					executeAfterTest(excelFilePath);
+					Log.endTestCase(testCase);
 				}
-				executeAfterTest(excelFilePath);
-				Log.endTestCase(testCase);
-			}
-			else {
-				test.setTestStatus(Constants.KEYWORD_SKIPPED);
-				ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
+				else {
+					test.setTestStatus(Constants.KEYWORD_SKIPPED);
+					ExcelUtils.setTestResultInExcel(excelFilePath, "Test Cases", j, Constants.COL_TESTCASERESULT, Constants.KEYWORD_SKIPPED);
+				}
 			}
 			TestSuite.suite.add(test);
 			test = null;
