@@ -3,6 +3,8 @@ package executionEngine;
 import java.lang.reflect.Method;
 import java.util.Properties;
 import org.apache.log4j.xml.DOMConfigurator;
+import org.openqa.selenium.WebDriver;
+
 import config.Actions;
 import config.Constants;
 import utillity.ExcelUtils;
@@ -13,6 +15,7 @@ import utillity.TestSuite;
 
 public class DriverScript {
 	
+	public static WebDriver driver;
 	public static Method method[];
 	public static Actions actions;
 	public static Properties OR;
@@ -28,6 +31,7 @@ public class DriverScript {
 	private static String beforeSuiteSheetName;
 	private static String afterSuiteSheetName;
 	private static boolean beforeSuiteResult;
+	public static String testCase;
 	
 	public static void main(String[] args) {
 		
@@ -239,7 +243,7 @@ public class DriverScript {
 		for(int j = 1 ; j < ExcelUtils.getLastRowNumber(excelSheetName); j++) {
 			
 			testResult = true;
-			String testCase = ExcelUtils.getCellData(j, Constants.COL_TESTCASEID, excelSheetName);
+			testCase = ExcelUtils.getCellData(j, Constants.COL_TESTCASEID, excelSheetName);
 			String run = ExcelUtils.getCellData(j, Constants.COL_RUNMODE, excelSheetName);
 			
 			//Create Object for Single Test

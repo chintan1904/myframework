@@ -1,23 +1,24 @@
 package config;
 
 import static executionEngine.DriverScript.OR;
+import static executionEngine.DriverScript.driver;
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import static executionEngine.DriverScript.testResult;
 
 import utillity.Helper;
 import utillity.Log;
+import utillity.ScreenCapture;
 
 public class Actions {
 	
-	public static WebDriver driver;
 	
 	public static void openBrowser(String object, String data) {
 		
 		try {
 			Log.info("Open Firefox browser");
 			driver = new FirefoxDriver();
+			ScreenCapture.take();
 		}
 		catch(Exception e) {
 			Log.error("Not able to initialize webdriver");
@@ -59,6 +60,7 @@ public class Actions {
 		try {
 			Log.info("Navigate to URL :  "+data);
 			driver.navigate().to(data);
+			ScreenCapture.take();
 		}
 		catch(Exception e) {
 			Log.error("Not able to navigate to URL :"+data);
@@ -74,6 +76,7 @@ public class Actions {
 			Log.info("Enter Text : "+data+" in field : "+object);
 			Helper.locateElement(OR.getProperty(object)).sendKeys(data);
 			//driver.findElement(By.xpath(OR.getProperty(object))).sendKeys(data);
+			ScreenCapture.take();
 		}
 		catch(Exception e) {
 			Log.error("Not able to enter text : "+data+" in field : "+object);
@@ -88,6 +91,7 @@ public class Actions {
 			Log.info("Click button : "+object);
 			Helper.locateElement(OR.getProperty(object)).click();
 			//driver.findElement(By.xpath(OR.getProperty(object))).click();
+			ScreenCapture.take();
 		}
 		catch(Exception e) {
 			Log.error("Not able to click the button :"+object);
@@ -101,6 +105,7 @@ public class Actions {
 		try { 
 			Log.info("Wait for 5 Seconds");
 			Thread.sleep(5000);
+			ScreenCapture.take();
 		}
 		catch(Exception  e) {
 			Log.error("Not able to wait for 5 seconds");
@@ -122,5 +127,4 @@ public class Actions {
 			testResult = false;
 		}
 	}
-
 }
